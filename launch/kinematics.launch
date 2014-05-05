@@ -1,0 +1,7 @@
+<launch>
+
+  <param name="robot_description" textfile="$(find uibk_kinematics)/config/uibk_robot.urdf"/>
+  <param name="robot_description_semantic" textfile="$(find uibk_kinematics)/config/uibk_robot.srdf"/>
+  <rosparam command="load" file="$(find uibk_kinematics)/config/kinematics.yaml"/>
+
+</launch>

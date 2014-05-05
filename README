@@ -1,0 +1,56 @@
+uibk_kinematics
+===============
+
+This package contains a library class called uibk_kinematics::Kinematics.
+This class can be used to easily compute FK and IK solutions for our robot.
+
+
+Installation
+============
+
+Just copy this package into your catkin workspace and compile it.
+
+Run the test
+============
+
+IMPORTANT: Make sure that the uibk_robot.urdf and the kinematics.yaml are uploaded to the parameter server
+before running any programm using this class, otherwise it will fail!
+You can do that with 
+
+  roslaunch uibk_kinematics kinematics.launch
+  
+To run the test file you can use
+  
+  rosrun uibk_kinematics kinematics_test
+  
+  
+Usage
+========
+
+Just instantiate an object of type uibk_kinematics::Kinematics...
+
+  uibk_kinematics::Kinematics kin;
+  
+... and use it's functions.
+
+  bool success = kin.computeIK(ARM, GOAL, SOLUTION_VECTOR);
+  
+  where ARM can be either 'left' or 'right'
+	GOAL is a geometry_msgs::Pose
+	SOLUTION_VECTOR is a vector<double> that holds the solution in case of success
+	
+  It is also possible to provide a seed state:
+  
+  bool success = kin.computeIK(ARM, GOAL, SEED, SOLUTION);
+  
+  where SEED is a vector<double>, holidng exactly as many entries as there are arm joints
+  
+... or
+  
+  bool success = kin.computeFK(ARM, JOINT_POSITIONS, SOLUTION);
+
+  where ARM is either 'left' or 'right'
+	JOINT_POSITIONS is a vector<double>, holding the jointpositions
+	SOLUTION is a geometry_msgs::Pose that will be filled with the solution in case of success
+  
+Look into kinematics_test.cpp to see the class in action.
